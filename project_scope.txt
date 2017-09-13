@@ -1,0 +1,15 @@
+SMS Messenger
+2.1 Messages
+    2.1.1 View, edit, and delete messages, save a message under edition as draft
+    2.1.2 Send & receive messages
+    2.1.3 Reply & forward messages
+    2.1.4 Search messages by text query
+    2.1.5 Send to multiple receivers (optional)
+    2.1.6 Scheduled message (optional)
+    2.1.7 Auto reply (optional)
+2.2 Message organization
+    2.2.1 Categorize messages by phone number (contact name)
+    2.2.2 Conversation view: view all messages between you and a certain
+    contact, sorted by sending/receiving time
+2.3 Other
+    2.3.1 Zoom in/out and scroll whenever necessary
