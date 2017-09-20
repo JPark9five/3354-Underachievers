@@ -16,3 +16,7 @@ Functional Requirement:
 3. Group Creation and admissions
   3.1 Group Creation will allow a user to create a group which other people can be added to
   3.2 Group admission will allow you to add other users to a created group
+
+4. Group Customization
+  4.1 Ability to change name of group (free access, no 'one' moderator)
+  4.2 Ability to change your user name in the group and possible able to edit a group picture
