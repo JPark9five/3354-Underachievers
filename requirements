@@ -11,3 +11,8 @@ Functional Requirement:
 
 
 2. The group message function shall allow user to send message to multiple people
+
+
+3. Group Creation and admissions
+  3.1 Group Creation will allow a user to create a group which other people can be added to
+  3.2 Group admission will allow you to add other users to a created group
