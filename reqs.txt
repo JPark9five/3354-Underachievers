@@ -1,0 +1,37 @@
+
+
+SendMessage
+	reply
+	edit a current message
+	recepient
+
+deleteMessage
+	choose and delete a sent message in a conversation
+
+forward
+	take a message and use it as a parameter of SendMessage
+draft
+	save current message if exited
+
+GroupMessage
+	SendMessage
+	recepients
+
+SearchMessage
+	input string finds a matching string from message memory
+
+addContacts
+	phone number mapping
+
+deleteContacts
+	delete specified phone numbers
+
+viewContacts
+	displays all contacts
+
+viewCategorizedConversations
+	catergorize messages into their respective senders(phone number) based on time (most recent at top)
+	displays catergorizeConversations
+
+viewMessages
+	Displays all messages sent and received based on time (most recent at bottom)
