@@ -1,4 +1,4 @@
-Definitions, Acronyms, Abbreviatons
+Definitions, Acronyms, Abbreviatons:
 
 App	=	Application
 
@@ -48,6 +48,6 @@ Functional Requirement:
 	11.1 Be able to view all messages sent and received based on time, where the most recent messages appear at the bottom
 
 
-USE CASE DIAGRAM
+USE CASE DIAGRAM:
 
 Refer to UseCaseDiagram1.jpg
