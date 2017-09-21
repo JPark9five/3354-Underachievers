@@ -32,3 +32,13 @@ Functional Requirement:
 
 8. deleteContacts
 	8.1 Ability to remove contacts from saved contact list
+
+9. viewContacts
+	9.1 Ability to view a list of contacts from saved contact list
+
+10. viewCategorizedConversations
+	10.1 Ability to categorize messages from a contact based on time, where the most recent conversations appear at the top
+	10.2 Ability to display the categorizedConversations
+	
+11. viewMessages
+	11.1 Be able to view all messages sent and received based on time, where the most recent messages appear at the bottom
