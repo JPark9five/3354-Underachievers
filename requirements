@@ -13,3 +13,10 @@ Functional Requirement:
 3. Forward
 	3.1 Ability to forward select messages to another user(s) in a different group chat
 	3.2 Forwarded info includes original sender and their message
+
+4. draft
+	4.1 Saves current message to a clipboard if app is exited/close and will keep it in the draft space until user makes a change
+
+5. GroupMessage
+	5.1 Ability to have a message sent to all recipients in that group
+	
