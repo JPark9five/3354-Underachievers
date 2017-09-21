@@ -20,3 +20,15 @@ Functional Requirement:
 5. GroupMessage
 	5.1 Ability to have a message sent to all recipients in that group
 	
+6. SearchMessage
+	6.1 Ability to take an input string from the user
+	6.2 Ability to find all exact matches, from any message in the currently selected conversation, to the inputted string
+	6.3 Successful matches will highlight matches in the conversation
+	6.4 Unsuccessful matches will result in no action at all
+
+7. addContacts
+	7.1 Ability to create a contact based on a phone number
+	7.2 User will be able to give contacts first and last names
+
+8. deleteContacts
+	8.1 Ability to remove contacts from saved contact list
