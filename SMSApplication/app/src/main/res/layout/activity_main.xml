@@ -15,15 +15,27 @@
             android:id="@+id/create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="111dp"
-            android:layout_marginRight="111dp"
-            android:layout_marginTop="193dp"
-            android:text="Create SMS"
-            tools:layout_editor_absoluteX="139dp"
-            tools:layout_editor_absoluteY="200dp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="75dp"
+            android:text="Create SMS" />
+
+        <Button
+            android:id="@+id/contacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="View Contacts" />
+
+        <Button
+            android:id="@+id/conversations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="75dp"
+            android:text="View Conversations" />
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

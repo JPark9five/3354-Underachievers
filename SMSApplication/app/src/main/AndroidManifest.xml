@@ -19,6 +19,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".Message"></activity>
+        <activity android:name=".Contacts"></activity>
+        <activity android:name=".Options"></activity>
+        <activity android:name=".AddContact"></activity>
+        <activity android:name=".EditContact"></activity>
+        <activity android:name=".DeleteContact"></activity>
+        <activity android:name=".Conversations"></activity>
     </application>
 
 </manifest>
