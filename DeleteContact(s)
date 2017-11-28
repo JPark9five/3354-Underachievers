@@ -1,0 +1,87 @@
+package com.example.briantruong.smsapplication;
+
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.database.Cursor;
+import android.content.ContentResolver;
+import android.provider.ContactsContract;
+import android.content.ContentProviderOperation;
+import android.os.RemoteException
+import java.util.ArrayList;
+import java.lang.Exception;
+
+/**
+ * Created by Alex on 11/15/2017.
+ * Edited by James on 11/28
+ */
+
+public class DeleteContact extends AppCompatActivity {
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_delete);
+
+
+    }
+    public static Cursor getContactCursor(ContentResolver contactHelper, String startsWith){
+        String [] projection = {ContactsContract.CommonDataKinds.Phone._ID,
+        ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+        ContactsContract.CommonDataKinds.Phone.NUMBER};
+        Cursor curs = null;
+        try{
+            if(startsWith != null && !startsWith.equals(" ")){
+                curs=contactHelper.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                    projection, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+ " line \"" +
+                                startsWith + "%\"",null,ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+                        + " ASC");
+            }
+            else{
+                curs= contactHelper.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        projection, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+                + " ASC");
+            }
+            curs.moveToFirst();
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return curs;
+    }
+    public static void deleteContact(ContentResolver contactHelper, String number){
+        ArrayList<ContentProviderOperation> ops = new ArrayList<>;
+        String[] args= new String[] {String.valueOf(getContactID(contactHelper, number))};
+        ops.add(ContentProviderOperation.newDelete(ContactsContract.RawContacts.CONTENT_URI).withSelection(ContactsContract.RawContacts.CONTACT_ID+"=?", args.build()));
+        try{
+            contactHelper.applyBatch(ContactsContract.AUTHORITY,ops);//unhandled exception
+        }
+        catch(RemoteException e){
+            e.printStackTrace();
+        }
+        catch(OperationApplicationException e){
+            e.printStackTrace();
+        }
+    }
+    private static long getContactID(ContentResolver contactHelper, String number){
+        Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
+        String[] projection = {ContactsContract.PhoneLookup._ID};
+        Cursor curs = null;
+        try{
+            curs= contactHelper.query(contactUri, projection, null, null, null);
+            if(curs.moveToFirst()){
+                int personID=curs.getColumnIndex(ContactsContract.PhoneLookup._ID);
+                return curs.getLong(personID);
+            }
+            return -1;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            if(curs !=null){
+                curs.close();
+                curs=null;
+            }
+            return -1;
+        }
+    }
+}
