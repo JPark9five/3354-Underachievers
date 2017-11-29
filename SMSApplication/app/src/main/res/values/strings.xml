@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">SMSApplication</string>
     <string name="create">Create SMS</string>
+    
+    
+    
+    <dimen name="activity_horizontal_margin"></dimen>
+    <dimen name="activity_vertical_margin"></dimen>
 </resources>
