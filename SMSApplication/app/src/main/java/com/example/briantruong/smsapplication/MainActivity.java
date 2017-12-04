@@ -19,28 +19,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Create SMS button
-    public void MessageConnection()
-    {
-        Button Cre = (Button)findViewById(R.id.create);
+    public void MessageConnection() {
+        Button Cre = (Button) findViewById(R.id.create);
 
-        Cre.setOnClickListener(new View.OnClickListener(){
+        Cre.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View v) {
-                Intent createact = new Intent( MainActivity.this, Message.class);
+                Intent createact = new Intent(MainActivity.this, Message.class);
                 startActivity(createact);
-               // finish();
+                // finish();
             }
-            });
+        });
     }
 
 
     //View Contacts button
-    public void ViewContacts()
-    {
-        Button Cont = (Button)findViewById(R.id.contacts);
+    public void ViewContacts() {
+        Button Cont = (Button) findViewById(R.id.contacts);
 
-        Cont.setOnClickListener(new View.OnClickListener(){
+        Cont.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View v) {
@@ -52,11 +50,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //View Contacts button
-    public void ViewConversations()
-    {
-        Button Conv = (Button)findViewById(R.id.conversations);
+    public void ViewConversations() {
+        Button Conv = (Button) findViewById(R.id.conversations);
 
-        Conv.setOnClickListener(new View.OnClickListener(){
+        Conv.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View v) {
@@ -66,7 +63,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 }

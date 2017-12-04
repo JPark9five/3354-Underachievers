@@ -15,6 +15,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 
+
+//Created by Brian Truong on 11/24/2017
+
 public class Message extends AppCompatActivity {
 
     Button btnSend;
