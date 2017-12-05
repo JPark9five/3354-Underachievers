@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 
 //Created by Brian Truong on 11/24/2017
@@ -24,6 +25,8 @@ public class Message extends AppCompatActivity {
     EditText tvMessage;
     EditText tvNumber;
     IntentFilter intentFilter;
+    Button testButton;
+
 
 
     private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
@@ -43,6 +46,9 @@ public class Message extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
+        Toast toast = Toast.makeText(getApplicationContext(),"Test 1", Toast.LENGTH_SHORT);
+        toast.show();
+
 
         //intent to filter for SMS message received
         intentFilter = new IntentFilter();
@@ -51,7 +57,17 @@ public class Message extends AppCompatActivity {
         btnSend = (Button) findViewById(R.id.btnSend);
         tvMessage = (EditText) findViewById(R.id.tvMessage);
         tvNumber = (EditText) findViewById(R.id.tvNumber);
+        testButton = (Button) findViewById(R.id.testButton);
 
+        testButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent cont = new Intent(Message.this,Contacts.class);
+                startActivityForResult(cont, 0);
+            }
+
+        });
 
         //getWindow()
         btnSend.setOnClickListener(new View.OnClickListener()
@@ -68,6 +84,7 @@ public class Message extends AppCompatActivity {
 
     protected void sendMsg(String theNumber, String myMsg)
     {
+
         String SENT = "Message Sent";
         String DELIVERED = "Message Delivered";
 

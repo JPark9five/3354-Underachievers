@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
 
     <application
         android:allowBackup="true"
@@ -11,7 +14,7 @@
         android:label="Message"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Message">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,8 +23,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Message"></activity>
+
         <activity android:name=".Contacts"></activity>
+        <activity android:name=".Options"></activity>
+        <activity android:name=".AddContact"></activity>
+        <activity android:name=".EditContact"></activity>
+        <activity android:name=".DeleteContact"></activity>
         <activity android:name=".Conversations"></activity>
 
         <receiver android:name=".ReceiveSMSActivity">
