@@ -46,8 +46,8 @@ public class Message extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        //Toast toast = Toast.makeText(getApplicationContext(),"Test 1", Toast.LENGTH_SHORT);
-        //toast.show();
+        Toast toast = Toast.makeText(getApplicationContext(),"Test 1", Toast.LENGTH_SHORT);
+        toast.show();
 
 
         //intent to filter for SMS message received
