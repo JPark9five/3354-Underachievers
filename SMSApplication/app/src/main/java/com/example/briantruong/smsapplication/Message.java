@@ -1,13 +1,19 @@
 package com.example.briantruong.smsapplication;
 
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Telephony;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
@@ -17,15 +23,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 
-//Created by Brian Truong on 11/24/2017
-
 public class Message extends AppCompatActivity {
 
     Button btnSend;
     EditText tvMessage;
     EditText tvNumber;
     IntentFilter intentFilter;
-    Button testButton;
+    final int SEND_SMS_PERMISSION_REQUEST_CODE = 111;
 
 
 
@@ -46,10 +50,6 @@ public class Message extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        //Toast toast = Toast.makeText(getApplicationContext(),"Test 1", Toast.LENGTH_SHORT);
-        //toast.show();
-
-
         //intent to filter for SMS message received
         intentFilter = new IntentFilter();
         intentFilter.addAction("SMS_RECEIVED_ACTION");
@@ -57,29 +57,51 @@ public class Message extends AppCompatActivity {
         btnSend = (Button) findViewById(R.id.btnSend);
         tvMessage = (EditText) findViewById(R.id.tvMessage);
         tvNumber = (EditText) findViewById(R.id.tvNumber);
-        testButton = (Button) findViewById(R.id.testButton);
 
-        testButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                Intent cont = new Intent(Message.this,Contacts.class);
-                startActivityForResult(cont, 0);
-            }
+        btnSend.setEnabled(false);
+        if(checkSMSPermission(Manifest.permission.SEND_SMS)) {
+            btnSend.setEnabled(true);
+        }
+        else{
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS},
+                    SEND_SMS_PERMISSION_REQUEST_CODE);
+        }
 
-        });
-
-        //getWindow()
         btnSend.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
                 String myMsg = tvMessage.getText().toString();
                 String theNumber = tvNumber.getText().toString();
-                sendMsg (theNumber, myMsg);
-            }
+                if(!checkSMSPermission(Manifest.permission.SEND_SMS)){
+                    Toast.makeText(Message.this, "Send SMS permission not granted", Toast.LENGTH_SHORT).show();
+                }
 
+                if(!myMsg.isEmpty() && !theNumber.isEmpty()){
+                    sendMsg (theNumber, myMsg);
+                }
+                else{
+                    Toast.makeText(Message.this, "Number and/or Message is empty", Toast.LENGTH_SHORT).show();
+                }
+            }
         });
+    }
+
+    protected boolean checkSMSPermission(String permission){
+        int checkSMSPermissionValue = ContextCompat.checkSelfPermission(this, permission);
+        return (checkSMSPermissionValue == PackageManager.PERMISSION_GRANTED);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+        switch(requestCode){
+            case SEND_SMS_PERMISSION_REQUEST_CODE: {
+                if (grantResults.length > 0 && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    btnSend.setEnabled(true);
+                }
+                return;
+            }
+        }
     }
 
     protected void sendMsg(String theNumber, String myMsg)

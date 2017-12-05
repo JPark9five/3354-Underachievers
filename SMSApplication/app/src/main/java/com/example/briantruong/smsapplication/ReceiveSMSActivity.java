@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.gsm.SmsMessage;
+import android.telephony.SmsMessage;
 import android.widget.Toast;
 
 public class ReceiveSMSActivity extends BroadcastReceiver
