@@ -9,33 +9,37 @@
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/white1"
         >
 
         <Button
             android:id="@+id/create"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="75dp"
-            android:text="Create SMS" />
+            android:text="Messages" />
 
         <Button
             android:id="@+id/contacts"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="View Contacts" />
+            android:text="Contacts" />
 
         <Button
             android:id="@+id/conversations"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="75dp"
-            android:text="View Conversations" />
+            android:text="Conversations" />
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
