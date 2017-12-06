@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Color;
 
 import org.w3c.dom.Text;
 
@@ -50,7 +51,6 @@ public class Contacts extends AppCompatActivity {
                 startActivityForResult(addContactIntent, 1);
             }
         });
-
         setTitle("Contact List");
         OptionsButton();
     }
@@ -101,7 +101,9 @@ public class Contacts extends AppCompatActivity {
             TextView number = (TextView) view.findViewById(R.id.singleContactNum);
 
             name.setText(curContact.getName());
+            name.setTextColor(Color.BLACK);
             number.setText(curContact.getNumber());
+            number.setTextColor(Color.BLACK);
 
             return view;
         }

@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+import android.graphics.Color;
 
 
 public class Message extends AppCompatActivity {
@@ -39,6 +40,7 @@ public class Message extends AppCompatActivity {
             //display the message in the textview
             TextView inTxt = (TextView) findViewById(R.id.textMsg);
             inTxt.setText(intent.getExtras().getString("message"));
+            inTxt.setTextColor(Color.BLACK);
 
         }
     };

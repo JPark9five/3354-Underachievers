@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.graphics.Color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class AddContact extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         nameText = (EditText) findViewById(R.id.nameInput);
         numberText = (EditText) findViewById(R.id.numberInput);
+        nameText.setTextColor(Color.BLACK);
+        numberText.setTextColor(Color.BLACK);
 
         final Button addButton = (Button) findViewById(R.id.finishAdd);
         addButton.setOnClickListener(new View.OnClickListener(){
