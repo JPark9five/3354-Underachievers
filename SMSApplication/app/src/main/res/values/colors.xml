@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#008B8B</color>
     <color name="colorAccent">#008B8B</color>
     <color name="DGrey">#708090</color>
+    <color name="Black">#000000</color>
 </resources>
