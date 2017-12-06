@@ -88,6 +88,7 @@ public class Contacts extends AppCompatActivity {
 
     private class ContactsAdapter extends ArrayAdapter<Contact>{
         public ContactsAdapter(){
+
             super(Contacts.this, R.layout.contact_item, ContactList);
         }
 

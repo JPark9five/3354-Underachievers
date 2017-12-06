@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -28,8 +30,8 @@
         <activity android:name="com.example.briantruong.smsapplication.DeleteContact"></activity>
         <activity android:name="com.example.briantruong.smsapplication.Conversations"></activity>
 
-        <receiver android:name=".ReceiveSMSActivity">
-            <intent-filter>
+        <receiver android:name=".ReceiveSMSActivity" android:exported="true">
+            <intent-filter android:priority="999">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
