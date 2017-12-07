@@ -74,7 +74,7 @@ public class Message extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-
+        getWindow().setBackgroundDrawableResource(R.drawable.white1) ;
         SMSDisplay();
         //intent to filter for SMS message received
         intentFilter = new IntentFilter();

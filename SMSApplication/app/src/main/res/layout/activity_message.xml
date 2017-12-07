@@ -13,7 +13,6 @@
 
     tools:context="com.example.briantruong.smsapplication.Message"
     android:orientation="vertical"
-
     >
 
     <RelativeLayout
