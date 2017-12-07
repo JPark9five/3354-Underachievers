@@ -43,6 +43,7 @@ public class SentMessages extends AppCompatActivity {
 
         arrayAdapterSent = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sentMessagesList);
         sentMessages.setAdapter(arrayAdapterSent);
+        registerForContextMenu(sentMessages);
         refreshSentMessages();
     }
 
@@ -66,7 +67,7 @@ public class SentMessages extends AppCompatActivity {
 
             String str = "Sent to: " + sentInboxCursor.getString(indexAddress) +
                     "\n" + sentInboxCursor.getString(indexBody) + "\n\nat " + finalTimestamp;
-            arrayAdapterSent.add(str);
+            arrayAdapterSent.insert(str, 0);
         } while (sentInboxCursor.moveToNext());
     }
 
@@ -92,5 +93,7 @@ public class SentMessages extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
     }
+
+
 }
 
