@@ -1,6 +1,6 @@
 package com.example.briantruong.smsapplication;
 /**
- * BroadcastReceiver used to receive all messages sent to the user's device 
+ * BroadcastReceiver used to receive all messages sent to the user's device
  */
 
 import android.content.BroadcastReceiver;
