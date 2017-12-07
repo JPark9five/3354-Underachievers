@@ -22,4 +22,17 @@ public class ReceiveSMSActivityTest {
 
     }
 
+    @Test
+    public void milisecondsToNormalFormat() throws Exception
+    {
+        String i = "198235671982";
+        String expected = "Sun Oct 15 2017 13:12:47 CST 2017";
+        String actual;
+        double delta = .1;
+
+        actual = milliToRegularTime(i);
+
+        assertEquals(expected, actual, delta);
+    }
+
 }
