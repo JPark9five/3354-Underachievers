@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.briantruong.smsapplication.Message"
+        <activity android:name="com.example.briantruong.smsapplication.MainActivity"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
 
             <intent-filter>
@@ -22,6 +23,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.example.briantruong.smsapplication.Message"></activity>
+        <activity android:name="com.example.briantruong.smsapplication.Contacts"></activity>
         <activity android:name="com.example.briantruong.smsapplication.SentMessages"></activity>
 
         <receiver android:name=".ReceiveSMSActivity">
