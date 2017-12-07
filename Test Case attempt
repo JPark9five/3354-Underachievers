@@ -29,7 +29,7 @@ public class Test1 extends AddContact{
 
         //test.startName;
         assertNotNull(test.getEditName());
-//failing to assertNotNull and assertNull
+// assertNotNull and assertNull
     }
     public EditText getEditName(){
         return this.startName;
