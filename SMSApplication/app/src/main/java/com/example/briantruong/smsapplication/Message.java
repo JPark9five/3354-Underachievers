@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 public class Message extends AppCompatActivity {
 
-    Button btnSend;
+    Button btnSend, goSentListView;
     EditText tvMessage;
     EditText tvNumber;
     IntentFilter intentFilter;
@@ -47,7 +47,6 @@ public class Message extends AppCompatActivity {
 
     final int SEND_SMS_PERMISSION_REQUEST_CODE = 111;
     private static final int READ_SMS_PERMISSIONS_REQUEST = 1;
-
 
     private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
         @Override
@@ -77,12 +76,20 @@ public class Message extends AppCompatActivity {
         setContentView(R.layout.activity_message);
 
         SMSDisplay();
-
         //intent to filter for SMS message received
         intentFilter = new IntentFilter();
         intentFilter.addAction("SMS_RECEIVED_ACTION");
-
         SendButton();
+
+        goSentListView = (Button) findViewById(R.id.gotoSent);
+        goSentListView.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent createact = new Intent(Message.this, SentMessages.class);
+                startActivity(createact);
+            }
+        });
 
     }
 
@@ -144,6 +151,8 @@ public class Message extends AppCompatActivity {
 
                 if(!myMsg.isEmpty() && !theNumber.isEmpty()){
                     sendMsg (theNumber, myMsg);
+                    tvMessage.setText("");
+                    tvNumber.setText("");
                 }
                 else{
                     Toast.makeText(Message.this, "Number and/or Message is empty", Toast.LENGTH_SHORT).show();

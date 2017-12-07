@@ -4,8 +4,7 @@
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +12,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.briantruong.smsapplication.MainActivity">
+        <activity android:name="com.example.briantruong.smsapplication.Message">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,16 +21,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.briantruong.smsapplication.Message"></activity>
-        <activity android:name="com.example.briantruong.smsapplication.Contacts"></activity>
-        <activity android:name="com.example.briantruong.smsapplication.Options"></activity>
-        <activity android:name="com.example.briantruong.smsapplication.AddContact"></activity>
-        <activity android:name="com.example.briantruong.smsapplication.EditContact"></activity>
-        <activity android:name="com.example.briantruong.smsapplication.DeleteContact"></activity>
-        <activity android:name="com.example.briantruong.smsapplication.Conversations"></activity>
+        <activity android:name="com.example.briantruong.smsapplication.SentMessages"></activity>
 
-        <receiver android:name=".ReceiveSMSActivity" android:exported="true">
-            <intent-filter android:priority="999">
+        <receiver android:name=".ReceiveSMSActivity">
+            <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>

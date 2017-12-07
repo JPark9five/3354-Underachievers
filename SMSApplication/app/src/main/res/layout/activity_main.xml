@@ -18,32 +18,25 @@
 
         <Button
             android:id="@+id/create"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="33dp"
-            android:background="@drawable/message1"
+            android:layout_marginTop="139dp"
+            android:text="Inbox and Send"
             tools:layout_editor_absoluteX="122dp"
             tools:layout_editor_absoluteY="65dp" />
 
         <Button
-            android:id="@+id/contacts"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/contact1" />
-
-        <Button
             android:id="@+id/conversations"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_alignLeft="@+id/create"
-            android:layout_alignParentBottom="true"
+            android:layout_height="60dp"
             android:layout_alignStart="@+id/create"
-            android:layout_marginBottom="27dp"
-            android:background="@drawable/conversation1" />
+            android:layout_below="@+id/create"
+            android:layout_marginTop="113dp"
+            android:text="Sent Messages" />
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
