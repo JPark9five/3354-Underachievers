@@ -1,0 +1,22 @@
+package com.example.briantruong.smsapplication;
+
+import android.widget.EditText;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+
+/**
+ * Created by jande on 12/6/2017.
+ */
+public class AddContactTest extends AddContact{
+    @Test
+    public void onCreate() {
+        EditText startName=(EditText) findViewById(R.id.nameInput);//null ptr..
+        EditText startNumber=findViewById(R.id.numberInput);
+        startNumber.setText("911");
+        startName.setText("Joe");
+        assertEquals(startName, "Joe");
+        assertEquals(startNumber, "911");
+    }
+
+}
