@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class ReceiveSMSActivity extends BroadcastReceiver
 {
     public static final String SMS_BUNDLE = "pdus";
@@ -24,13 +27,27 @@ public class ReceiveSMSActivity extends BroadcastReceiver
 
                 String smsBody = smsMessage.getMessageBody().toString();
                 String address = smsMessage.getOriginatingAddress();
+                String timestamp = Long.toString(smsMessage.getTimestampMillis());
+                String finalTimeStamp = milliToRegularTime(timestamp);
 
                 smsMessageStr += "SMS From: " + address + "\n";
                 smsMessageStr += smsBody + "\n";
+                smsMessageStr += "\nat " + finalTimeStamp;
             }
 
             Message inst = Message.instance();
             inst.updateInbox(smsMessageStr);
         }
+    }
+
+    public String milliToRegularTime(String milli){
+        //Steps to convert parsed timestamp from milliseconds to normal timestamp format
+        Long timestamp = Long.parseLong(milli);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timestamp);
+        Date finalDate = calendar.getTime();
+        String finalTimestamp = finalDate.toString();
+
+        return finalTimestamp;
     }
 }

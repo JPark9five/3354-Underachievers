@@ -33,6 +33,8 @@ import android.widget.Toast;
 import android.graphics.Color;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class Message extends AppCompatActivity {
@@ -167,7 +169,7 @@ public class Message extends AppCompatActivity {
     }
 
     public void updateInbox(final String smsMessage) {
-        arrayAdapter.insert(smsMessage, 0);
+        arrayAdapter.add(smsMessage);
         arrayAdapter.notifyDataSetChanged();
     }
 
@@ -210,14 +212,22 @@ public class Message extends AppCompatActivity {
         Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/inbox"), null, null, null, null);
         int indexBody = smsInboxCursor.getColumnIndex("body");
         int indexAddress = smsInboxCursor.getColumnIndex("address");
+        int indexTime = smsInboxCursor.getColumnIndex("date");
         if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
         arrayAdapter.clear();
         do {
+            //Steps to convert parsed timestamp from milliseconds to normal timestamp format
+            String timeInMilliseconds = smsInboxCursor.getString(indexTime);
+            Long timestamp = Long.parseLong(timeInMilliseconds);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(timestamp);
+            Date finalDate = calendar.getTime();
+            String finalTimestamp = finalDate.toString();
+
             String str = "SMS From: " + smsInboxCursor.getString(indexAddress) +
-                    "\n" + smsInboxCursor.getString(indexBody) + "\n";
+                    "\n" + smsInboxCursor.getString(indexBody) + "\n\nat " + finalTimestamp;
             arrayAdapter.add(str);
         } while (smsInboxCursor.moveToNext());
-//messages.setSelection(arrayAdapter.getCount() - 1);
     }
 
 

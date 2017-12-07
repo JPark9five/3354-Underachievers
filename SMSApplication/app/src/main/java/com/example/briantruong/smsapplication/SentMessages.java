@@ -5,16 +5,17 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.view.ContextMenu;
-import android.view.View;
-
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Josh on 12/6/2017.
@@ -29,6 +30,7 @@ public class SentMessages extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sentmessages);
+        getWindow().setBackgroundDrawableResource(R.drawable.white1) ;
 
         SMSDisplay();
 
@@ -42,7 +44,6 @@ public class SentMessages extends AppCompatActivity {
         arrayAdapterSent = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sentMessagesList);
         sentMessages.setAdapter(arrayAdapterSent);
         refreshSentMessages();
-        registerForContextMenu(sentMessages);
     }
 
     public void refreshSentMessages() {
@@ -51,15 +52,23 @@ public class SentMessages extends AppCompatActivity {
 
         int indexBody = sentInboxCursor.getColumnIndex("body");
         int indexAddress = sentInboxCursor.getColumnIndex("address");
+        int indexTime = sentInboxCursor.getColumnIndex("date");
         if (indexBody < 0 || !sentInboxCursor.moveToFirst()) return;
         arrayAdapterSent.clear();
         do {
+            //Steps to convert parsed timestamp from milliseconds to normal timestamp format
+            String timeInMilliseconds = sentInboxCursor.getString(indexTime);
+            Long timestamp = Long.parseLong(timeInMilliseconds);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(timestamp);
+            Date finalDate = calendar.getTime();
+            String finalTimestamp = finalDate.toString();
+
             String str = "Sent to: " + sentInboxCursor.getString(indexAddress) +
-                    "\n" + sentInboxCursor.getString(indexBody) + "\n";
+                    "\n" + sentInboxCursor.getString(indexBody) + "\n\nat " + finalTimestamp;
             arrayAdapterSent.add(str);
         } while (sentInboxCursor.moveToNext());
     }
-
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenu.ContextMenuInfo menuInfo )
@@ -84,3 +93,4 @@ public class SentMessages extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }
 }
+
