@@ -1,4 +1,13 @@
 package com.example.briantruong.smsapplication;
+/**
+ * Original MainActivty meant to navigate between contacts, messages, and
+ * sent messages. Discontinued due to discontinuing the contacts manager part of
+ * the SMS project.
+ *
+ * Previous versions had a button to traverse to contacts but was removed during
+ * a debugging process and never put back in due to discontinuing the contacts
+ * part as a whole.
+ */
 
 import android.Manifest;
 import android.content.BroadcastReceiver;

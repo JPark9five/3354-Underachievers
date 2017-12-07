@@ -1,4 +1,8 @@
 package com.example.briantruong.smsapplication;
+/**
+ * Options activity meant to allow adding, editing, and deleting of contacts.
+ * Discontinued early in the development process.
+ */
 
 import android.content.Intent;
 import android.os.Bundle;

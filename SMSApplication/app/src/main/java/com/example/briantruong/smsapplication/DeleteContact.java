@@ -1,4 +1,7 @@
 package com.example.briantruong.smsapplication;
+/**
+ * Delete contacts activity status: discontinued
+ */
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

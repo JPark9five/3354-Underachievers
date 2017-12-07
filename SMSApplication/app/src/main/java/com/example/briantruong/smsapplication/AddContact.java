@@ -1,4 +1,9 @@
 package com.example.briantruong.smsapplication;
+/**
+ * Add contact activity was intended for adding contacts, but couldn't implement whole
+ * contact functionality; therefore, we decided to drop the contacts functionality
+ * completely.
+ */
 
 import android.app.Activity;
 import android.content.Intent;

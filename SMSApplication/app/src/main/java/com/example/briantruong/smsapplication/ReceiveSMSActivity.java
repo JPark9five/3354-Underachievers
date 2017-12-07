@@ -1,4 +1,7 @@
 package com.example.briantruong.smsapplication;
+/**
+ * BroadcastReceiver used to receive all messages sent to the user's device 
+ */
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -40,14 +43,18 @@ public class ReceiveSMSActivity extends BroadcastReceiver
         }
     }
 
+    /**
+     *
+     * @param milli a string representing milliseconds
+     * @return a string that represents the full date form of the milliseconds passed in
+     */
     public String milliToRegularTime(String milli){
         //Steps to convert parsed timestamp from milliseconds to normal timestamp format
         Long timestamp = Long.parseLong(milli);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timestamp);
         Date finalDate = calendar.getTime();
-        String finalTimestamp = finalDate.toString();
 
-        return finalTimestamp;
+        return finalDate.toString();
     }
 }

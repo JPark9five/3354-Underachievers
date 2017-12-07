@@ -1,4 +1,9 @@
 package com.example.briantruong.smsapplication;
+/**
+ * Contacts main activity where contact list would have resided, but was discontinued
+ * midway through the development process due to acknowledgement that the SMS
+ * functionality takes priority
+ */
 
 import android.Manifest;
 import android.app.Activity;

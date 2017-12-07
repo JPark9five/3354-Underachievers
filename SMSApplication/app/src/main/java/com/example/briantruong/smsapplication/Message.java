@@ -1,5 +1,8 @@
 package com.example.briantruong.smsapplication;
-
+/**
+ * Message activity that serves as the main activity. The app starts here and resides here unless
+ * user wants to access sent messages list.
+ */
 
 import android.Manifest;
 import android.app.PendingIntent;
@@ -54,10 +57,13 @@ public class Message extends AppCompatActivity {
     final int SEND_SMS_PERMISSION_REQUEST_CODE = 111;
     private static final int READ_SMS_PERMISSIONS_REQUEST = 1;
 
+    /**
+     * Creation of a broadcast receiver. This will allow the activity to display received messages
+     */
     private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            //display the message in the textview
+            //display the message in the list view
             TextView inTxt = (TextView) findViewById(R.id.textMsg);
             inTxt.setText(intent.getExtras().getString("message"));
             inTxt.setTextColor(Color.BLACK);
@@ -80,13 +86,19 @@ public class Message extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+
+        //Aesthetic background implementation
         getWindow().setBackgroundDrawableResource(R.drawable.white1) ;
+
         SMSDisplay();
+
         //intent to filter for SMS message received
         intentFilter = new IntentFilter();
         intentFilter.addAction("SMS_RECEIVED_ACTION");
+
         SendButton();
 
+        //Assigning a button to go to sent messages list on click
         goSentListView = (Button) findViewById(R.id.gotoSent);
         goSentListView.setOnClickListener(new View.OnClickListener()
         {
@@ -99,15 +111,21 @@ public class Message extends AppCompatActivity {
 
     }
 
+    /**
+     * SMSDisplay will set up an ArrayAdapter, and if permission to read SMS is granted, will call
+     * refreshSmsInbox to fill the ListView with existing messages. Else it will call getPermissionToReadSMS
+     * to retrieve permissions to read SMS on the device.
+     */
     public void SMSDisplay()
     {
-        //Display the Previous SMS
-
         messages = (ListView)findViewById(R.id.messages);
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, smsMessagesList);
         messages.setAdapter(arrayAdapter);
+
+        //Allows for messages to be deleted when user clicks and holds a message
         registerForContextMenu(messages);
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS)
                 != PackageManager.PERMISSION_GRANTED) {
             getPermissionToReadSMS();
@@ -118,6 +136,8 @@ public class Message extends AppCompatActivity {
     }
 
 
+
+    //Will double check if permissions are not granted, then prompt the user to give permissions
     public void getPermissionToReadSMS() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -130,12 +150,14 @@ public class Message extends AppCompatActivity {
         }
     }
 
+    //Function to send messages
     public void SendButton()
     {
         btnSend = (Button) findViewById(R.id.btnSend);
         tvMessage = (EditText) findViewById(R.id.tvMessage);
         tvNumber = (EditText) findViewById(R.id.tvNumber);
 
+        //Force disable the send button until permission to send SMS is confirmed, then re-enable once confirmed
         btnSend.setEnabled(false);
         if(checkSMSPermission(Manifest.permission.SEND_SMS)) {
             btnSend.setEnabled(true);
@@ -156,6 +178,7 @@ public class Message extends AppCompatActivity {
                     Toast.makeText(Message.this, "Send SMS permission not granted", Toast.LENGTH_SHORT).show();
                 }
 
+                //Require the user to have a number and message. User can only enter numbers for number and anything for message.
                 if(!myMsg.isEmpty() && !theNumber.isEmpty()){
                     sendMsg (theNumber, myMsg);
                     tvMessage.setText("");
@@ -168,12 +191,22 @@ public class Message extends AppCompatActivity {
         });
     }
 
+    /**
+     * This function, as named, will simply update the Inbox with any new messages
+     *
+     * @param smsMessage a message to add into the ListView
+     */
     public void updateInbox(final String smsMessage) {
         arrayAdapter.add(smsMessage);
         arrayAdapter.notifyDataSetChanged();
     }
 
 
+    /**
+     *
+     * @param permission
+     * @return true if permission for any permission request returns PERMISSION_GRANTED
+     */
     protected boolean checkSMSPermission(String permission){
         int checkSMSPermissionValue = ContextCompat.checkSelfPermission(this, permission);
         return (checkSMSPermissionValue == PackageManager.PERMISSION_GRANTED);
@@ -207,6 +240,10 @@ public class Message extends AppCompatActivity {
 
     }
 
+    /**
+     * When opening the activity, this function will parse messages stored in the phone's local database files
+     * and update the ListView to include any existing received messages via a URI parse.
+     */
     public void refreshSmsInbox() {
         ContentResolver contentResolver = getContentResolver();
         Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/inbox"), null, null, null, null);
@@ -216,28 +253,45 @@ public class Message extends AppCompatActivity {
         if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
         arrayAdapter.clear();
         do {
-            //Steps to convert parsed timestamp from milliseconds to normal timestamp format
+            //Steps to convert parsed timestamp from milliseconds to normal timestamp format using refactored function
             String timeInMilliseconds = smsInboxCursor.getString(indexTime);
-            Long timestamp = Long.parseLong(timeInMilliseconds);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(timestamp);
-            Date finalDate = calendar.getTime();
-            String finalTimestamp = finalDate.toString();
+            String finalTimestamp = milisecondsToNormalFormat(timeInMilliseconds);
 
+            //Addition of a formatted message into the ListView
             String str = "SMS From: " + smsInboxCursor.getString(indexAddress) +
                     "\n" + smsInboxCursor.getString(indexBody) + "\n\nat " + finalTimestamp;
             arrayAdapter.add(str);
         } while (smsInboxCursor.moveToNext());
     }
 
+    /**
+     *
+     * @param milliseconds a string representing milliseconds
+     * @return a string that represents the full date form of the milliseconds passed in
+     */
+    public String milisecondsToNormalFormat(String milliseconds){
+        //Steps to convert parsed timestamp from milliseconds to normal timestamp format
+        Long timestamp = Long.parseLong(milliseconds);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timestamp);
+        Date finalDate = calendar.getTime();
+
+        return finalDate.toString();
+    }
 
 
+    /**
+     *
+     * @param theNumber a string of the message destination address the user wants to send to
+     * @param myMsg a string of the message body that the user wants to send
+     */
     protected void sendMsg(String theNumber, String myMsg)
     {
 
         String SENT = "Message Sent";
         String DELIVERED = "Message Delivered";
 
+        //Pending intents to notify when a message is sent, mostly used for debugging as sent messages will appear in sent messages when sent successfully
         PendingIntent sendPI = PendingIntent.getBroadcast(this,0, new Intent(SENT), 0);
         PendingIntent deliveredPI = PendingIntent.getBroadcast(this,0, new Intent(DELIVERED), 0);
 
@@ -254,6 +308,12 @@ public class Message extends AppCompatActivity {
         menuInflater.inflate(R.menu.context_menu_file,menu);
     }
 
+    /**
+     * Implementation of the click and hold to delete functionality in the ListView
+     *
+     * @param item the message a user clicks and holds
+     * @return the deleted item, but doesn't ever get used
+     */
     @Override
     public boolean onContextItemSelected(MenuItem item)
     {

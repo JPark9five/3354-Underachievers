@@ -1,4 +1,8 @@
 package com.example.briantruong.smsapplication;
+/**
+ * Contact entity made to hold contact information, but contact functionality was
+ * discontinued due to inability to complete contact functionality as a whole
+ */
 
 import java.io.Serializable;
 
